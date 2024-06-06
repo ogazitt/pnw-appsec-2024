@@ -1,0 +1,28 @@
+{
+    "assertions": [
+        {"check":{"subject_type":"user","subject_id":"rick@the-citadel.com","relation":"member","object_type":"group","object_id":"admin"},"expected":true},
+        {"check":{"subject_type":"user","subject_id":"rick@the-citadel.com","relation":"member","object_type":"group","object_id":"evil_genius"},"expected":true},
+        {"check":{"subject_type":"user","subject_id":"rick@the-citadel.com","relation":"member","object_type":"group","object_id":"editor"},"expected":true},
+        {"check":{"subject_type":"user","subject_id":"rick@the-citadel.com","relation":"member","object_type":"group","object_id":"viewer"},"expected":true},
+
+        {"check":{"subject_type":"user","subject_id":"morty@the-citadel.com","relation":"member","object_type":"group","object_id":"admin"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"morty@the-citadel.com","relation":"member","object_type":"group","object_id":"evil_genius"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"morty@the-citadel.com","relation":"member","object_type":"group","object_id":"editor"},"expected":true},
+        {"check":{"subject_type":"user","subject_id":"morty@the-citadel.com","relation":"member","object_type":"group","object_id":"viewer"},"expected":true},
+
+        {"check":{"subject_type":"user","subject_id":"summer@the-smiths.com","relation":"member","object_type":"group","object_id":"admin"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"summer@the-smiths.com","relation":"member","object_type":"group","object_id":"evil_genius"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"summer@the-smiths.com","relation":"member","object_type":"group","object_id":"editor"},"expected":true},
+        {"check":{"subject_type":"user","subject_id":"summer@the-smiths.com","relation":"member","object_type":"group","object_id":"viewer"},"expected":true},
+
+        {"check":{"subject_type":"user","subject_id":"beth@the-smiths.com","relation":"member","object_type":"group","object_id":"admin"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"beth@the-smiths.com","relation":"member","object_type":"group","object_id":"evil_genius"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"beth@the-smiths.com","relation":"member","object_type":"group","object_id":"editor"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"beth@the-smiths.com","relation":"member","object_type":"group","object_id":"viewer"},"expected":true},
+
+        {"check":{"subject_type":"user","subject_id":"jerry@the-smiths.com","relation":"member","object_type":"group","object_id":"admin"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"jerry@the-smiths.com","relation":"member","object_type":"group","object_id":"evil_genius"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"jerry@the-smiths.com","relation":"member","object_type":"group","object_id":"editor"},"expected":false},
+        {"check":{"subject_type":"user","subject_id":"jerry@the-smiths.com","relation":"member","object_type":"group","object_id":"viewer"},"expected":true}
+    ]
+}
