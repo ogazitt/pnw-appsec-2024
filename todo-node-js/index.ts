@@ -52,7 +52,7 @@ Store.open().then((store) => {
       // ...or if the user is an editor and the user owns this todo
       if (user.roles.includes("admin") ||
           user.roles.includes("editor") && todo.OwnerID === user.id) {
-        next()
+        next();
       } else {
         res.status(403).send({ "msg": "Access denied" });
       }
@@ -122,7 +122,7 @@ Store.open().then((store) => {
           user.roles.includes("editor") && todo.OwnerID === user.id) {
         return server.update(req, res);
       } else {
-        res.status(403).send({ "msg": "Access denied" })
+        res.status(403).send({ "msg": "Access denied" });
       }
     } catch (error) {
       res.status(500).send(error);

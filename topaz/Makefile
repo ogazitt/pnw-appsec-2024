@@ -21,10 +21,16 @@ CONTAINER_NAME := topaz
 CONTAINER_VERSION := latest
 
 .PHONY: all
-all: manifest data test
+all: todo-roles todo-groups todo-rebac
 
-.PHONY: test-all
-test-all: clean configure manifest data test
+.PHONY: todo-roles
+todo-roles: build-todo-roles configure-todo-roles sleep-roles manifest-roles data-roles test-roles
+
+.PHONY: todo-groups
+todo-groups: build-todo-groups configure-todo-groups sleep-groups manifest-groups data-groups test-groups
+
+.PHONY: todo-rebac
+todo-rebac: build-todo-rebac configure-todo-rebac sleep-rebac manifest-rebac data-rebac test-rebac
 
 .PHONY: install
 install:
@@ -73,8 +79,38 @@ configure-todo-rebac:
 	@topaz config use ${POLICY_NAME}-rebac
 	@topaz start
 
+.PHONY: sleep-roles
+sleep-roles:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@sleep 1
+
+.PHONY: sleep-groups
+sleep-groups:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@sleep 1
+
+.PHONY: sleep-rebac
+sleep-rebac:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@sleep 1
+
 .PHONY: manifest
 manifest:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory set manifest ./model/manifest.yaml --insecure --no-check
+
+.PHONY: manifest-roles
+manifest-roles:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory set manifest ./model/manifest.yaml --insecure --no-check
+
+.PHONY: manifest-groups
+manifest-groups:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory set manifest ./model/manifest.yaml --insecure --no-check
+
+.PHONY: manifest-rebac
+manifest-rebac:
 	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
 	@topaz directory set manifest ./model/manifest.yaml --insecure --no-check
 
@@ -83,18 +119,44 @@ data:
 	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
 	@topaz directory import --directory=./data --insecure --no-check
 
+.PHONY: data-roles
+data-roles:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory import --directory=./data --insecure --no-check
+
+.PHONY: data-groups
+data-groups:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory import --directory=./data --insecure --no-check
+
+.PHONY: data-rebac
+data-rebac:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory import --directory=./data --insecure --no-check
+
 .PHONY: test
 test:
 	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
 	@topaz directory test exec ./test/assertions.json --insecure --no-check
-	@topaz authorizer test exec ./test/decisions.json --insecure --no-check 
+	@topaz authorizer test exec ./test/decisions.json --insecure --no-check
 
-.PHONY: clean
-clean:
+.PHONY: test-roles
+test-roles:
 	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
-	@topaz stop
-	@rm ${HOME}/.local/share/topaz/db/directory.db
-	@topaz start
+	@topaz directory test exec ./test/assertions.json --insecure --no-check
+	@topaz authorizer test exec ./test/decisions.json --insecure --no-check
+
+.PHONY: test-groups
+test-groups:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory test exec ./test/assertions.json --insecure --no-check
+	@topaz authorizer test exec ./test/decisions.json --insecure --no-check
+
+.PHONY: test-rebac
+test-rebac:
+	@echo -e "${ATTN_COLOR}==> $@ ${NO_COLOR}"
+	@topaz directory test exec ./test/assertions.json --insecure --no-check
+	@topaz authorizer test exec ./test/decisions.json --insecure --no-check
 
 .PHONY: restart
 restart:
