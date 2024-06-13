@@ -62,7 +62,7 @@ Store.open().then((store) => {
   }
   */
 
-  // Aserto authorizer middleware function
+  // Topaz authorizer middleware function
   const checkAuthz: express.Handler = jwtAuthz(
     authzOptions,
     undefined,
@@ -76,7 +76,7 @@ Store.open().then((store) => {
     }
   );
 
-  // super simple middleware - works with policy-rebac-global-appsec
+  // super simple middleware - works with policy-todo-rebac
   // const checkAuthz: express.Handler = jwtAuthz(authzOptions);
 
   const directory = new Directory({});
